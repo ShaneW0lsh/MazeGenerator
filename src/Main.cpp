@@ -10,3 +10,6 @@ int main() {
    2. DON'T FORGET ABOUT REFERENCES
    3. Play with graphics a bit
 */
+
+/* DONE:
+ * 1.Created a new repo */ 
