@@ -28,7 +28,6 @@ private:
     uint32_t m_rowCellQuantity;
     uint32_t m_totalCellQuantity;
 
-    //references are a must here
     std::vector<std::vector<Cell>> m_cellContainer;
     std::stack<Cell> m_cellStack;
 
@@ -40,6 +39,12 @@ private:
 
 	void onCreateCells();
     void onRenderCells();
+
+    const std::vector<Cell*> onCheckNeighbours(Cell& c);
+    void onRemoveWallsBetween(Cell& f, Cell& s);
+    /* void onUpdateCurrentCell(); */
+
+    void onMazeGenerate();
 
     void onUpdate();
     void onRender();

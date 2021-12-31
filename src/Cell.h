@@ -19,6 +19,8 @@ public:
     void setVisited(bool val);
     bool getVisited();
 
+    sf::Vector2f getPos();
+
 private:
     sf::RenderWindow* m_window;
 
@@ -27,7 +29,8 @@ private:
 
     bool m_bVisited;
 
-    std::vector<bool> m_walls;
+    //std::vector<bool> m_walls;
+	bool* m_walls;
 
     void onInitVariables();
 };
