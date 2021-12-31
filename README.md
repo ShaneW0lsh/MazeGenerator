@@ -1,4 +1,1 @@
 # MazeGenerator
-
-# Requirements
-SFML
