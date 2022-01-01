@@ -61,12 +61,12 @@ void Engine::onCreateCells() {
         
 			if (i == 0 && u == 0) {
 				tmpCell.setVisited(true);
+				tmpCell.setCurrent(true);
 				m_cellStack.push(tmpCell);
 			}
 
 			m_cellContainer[i][u] = tmpCell;
            // m_cellStack.push(tmpCell);
-			std::cerr << "is visited: " << tmpCell.getVisited() << '\n';
         }
     }
 }
@@ -92,7 +92,6 @@ const std::vector<Cell*> Engine::onCheckNeighbours(Cell& c) {
     //top row
     if (cy == 0) { 
         //{{{ 
-		std::cerr << "m_rowCellQuantity: " << m_rowCellQuantity << '\n';
         if (cx == 0) { 
             if (!m_cellContainer[cx][cy+1].getVisited()) {
                 std::cerr << "an nb was found!\n"; 
@@ -293,7 +292,9 @@ void Engine::step() {
     if (!m_cellStack.empty()) { 
         // Place where a bug can occur easily, because of pointer syntax
 		Cell* currentCell = &(m_cellStack.top());
+		currentCell->setCurrent(true);
 		m_cellStack.pop();
+
 
         /* // it might be better to do this in the Cell class somewhere */
         /* sf::RectangleShape cShape(sf::Vector2f(m_cellSize, m_cellSize)); */
@@ -311,7 +312,6 @@ void Engine::step() {
 
         if (nb.size() > 0) {
             uint16_t rd_n = rand() % nb.size();
-            std::cerr <<"rd_n :" << rd_n << '\n';
 
             onRemoveWallsBetween(*currentCell, *nb[rd_n]);
 

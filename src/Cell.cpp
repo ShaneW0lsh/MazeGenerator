@@ -5,8 +5,6 @@ Cell::Cell(sf::Vector2f arg_pos, uint32_t arg_size) {
     m_size = arg_size;
 
 	onInitVariables();
-
-	std::cerr << "Cell created\n";
 }
 
 Cell::Cell() {};
@@ -25,6 +23,7 @@ void Cell::onInitVariables() {
 void Cell::render(sf::RenderWindow* arg_window) { 
 //{{{
     if (m_bCurrent) { 
+		std::cerr << "YEAh it defenitely is a current cell!\n";
         sf::RectangleShape c(sf::Vector2f(m_size, m_size));
         c.setPosition(m_pos.x, m_pos.y);
         c.setFillColor(sf::Color::Red);
@@ -115,6 +114,10 @@ bool Cell::getVisited() {
 
 bool Cell::getCurrent() {
     return m_bCurrent;
+}
+
+void Cell::setCurrent(bool val) {
+	m_bCurrent = val;
 }
 
 sf::Vector2f Cell::getPos() {
