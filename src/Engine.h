@@ -28,6 +28,8 @@ private:
     uint32_t m_rowCellQuantity;
     uint32_t m_totalCellQuantity;
 
+    bool m_isGenerating;
+
     std::vector<std::vector<Cell>> m_cellContainer;
     std::stack<Cell> m_cellStack;
 
@@ -44,7 +46,9 @@ private:
     void onRemoveWallsBetween(Cell& f, Cell& s);
     /* void onUpdateCurrentCell(); */
 
-    void onMazeGenerate();
+    /* void onMazeGenerate(); */
+    
+    void step();
 
     void onUpdate();
     void onRender();

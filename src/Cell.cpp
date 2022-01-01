@@ -1,7 +1,6 @@
 #include <Cell.h>
 
-Cell::Cell(sf::RenderWindow* arg_window, sf::Vector2f arg_pos, uint32_t arg_size) { 
-    m_window = arg_window;
+Cell::Cell(sf::Vector2f arg_pos, uint32_t arg_size) { 
     m_pos = arg_pos;
     m_size = arg_size;
 
@@ -20,12 +19,19 @@ void Cell::onInitVariables() {
     m_walls[3] = true;
 
     m_bVisited = false;
+    m_bCurrent = false;
 }
 
-void Cell::render() { 
+void Cell::render(sf::RenderWindow* arg_window) { 
 //{{{
-    sf::Vector2f st, ed;
+    if (m_bCurrent) { 
+        sf::RectangleShape c(sf::Vector2f(m_size, m_size));
+        c.setPosition(m_pos.x, m_pos.y);
+        c.setFillColor(sf::Color::Red);
+        arg_window->draw(c);
+    }
 
+    sf::Vector2f st, ed;
     if (m_walls[0]) { //{{{
         st = sf::Vector2f(m_pos.x, m_pos.y);
         ed = sf::Vector2f(m_pos.x + m_size, m_pos.y);
@@ -38,7 +44,7 @@ void Cell::render() {
 			f, s
 		};
 
-        m_window->draw(wall, 2, sf::Lines);
+        arg_window->draw(wall, 2, sf::Lines);
     } //}}} 
     if (m_walls[1]) { //{{{
         st = sf::Vector2f(m_pos.x + m_size, m_pos.y);
@@ -52,7 +58,7 @@ void Cell::render() {
             f, s
 		};
 
-        m_window->draw(wall, 2, sf::Lines);
+		arg_window->draw(wall, 2, sf::Lines);
     } //}}} 
     if (m_walls[2]) { //{{{
         st = sf::Vector2f(m_pos.x + m_size, m_pos.y + m_size);
@@ -68,7 +74,7 @@ void Cell::render() {
 		};
 
 
-        m_window->draw(wall, 2, sf::Lines);
+		arg_window->draw(wall, 2, sf::Lines);
     } //}}}
     if (m_walls[3]) { //{{{
         st = sf::Vector2f(m_pos.x, m_pos.y + m_size);
@@ -82,7 +88,7 @@ void Cell::render() {
             f, s
 		};
 
-        m_window->draw(wall, 2, sf::Lines);
+		arg_window->draw(wall, 2, sf::Lines);
     } //}}}
 } //}}}
 
@@ -105,6 +111,10 @@ void Cell::setVisited(bool val) {
 
 bool Cell::getVisited() {
     return m_bVisited;
+}
+
+bool Cell::getCurrent() {
+    return m_bCurrent;
 }
 
 sf::Vector2f Cell::getPos() {
